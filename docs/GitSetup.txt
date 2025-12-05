@@ -1,0 +1,364 @@
+# 🚀 Setup de Git y GitHub para Némesis IA
+
+Esta guía te muestra cómo inicializar Git y subir el proyecto a GitHub.
+
+## 📋 Pre-requisitos
+
+1. **Git instalado:**
+   ```bash
+   git --version
+   # Si no está instalado: sudo apt install git
+   ```
+
+2. **Cuenta de GitHub:**
+   - Crea una cuenta en https://github.com
+
+3. **SSH Key configurado (recomendado):**
+   ```bash
+   # Generar SSH key
+   ssh-keygen -t ed25519 -C "tu-email@example.com"
+   
+   # Añadir a ssh-agent
+   eval "$(ssh-agent -s)"
+   ssh-add ~/.ssh/id_ed25519
+   
+   # Copiar clave pública
+   cat ~/.ssh/id_ed25519.pub
+   # Pegar en GitHub: Settings > SSH and GPG keys > New SSH key
+   ```
+
+---
+
+## 🎯 Opción 1: Repositorio Nuevo en GitHub
+
+### Paso 1: Crear Repositorio en GitHub
+
+1. Ve a https://github.com/new
+2. **Repository name:** `nemesis-ai` (o `nemesis`)
+3. **Description:** `Sistema Automatizado de Defensa Cibernética con IA`
+4. **Visibility:** Public o Private (tu elección)
+5. **NO** inicialices con README, .gitignore, o license (ya los tenemos)
+6. Click **"Create repository"**
+
+### Paso 2: Inicializar Git Localmente
+
+```bash
+# Navegar al directorio del proyecto
+cd nemesis-ai
+
+# Inicializar Git
+git init
+
+# Añadir todos los archivos
+git add .
+
+# Primer commit
+git commit -m "feat: Initial commit - Capítulo 1 implementado
+
+- Agente Némesis autónomo con ciclo O.A.S.
+- Detección basada en reglas (SQL Injection, XSS, etc.)
+- Feature extraction para ML
+- Documentación completa
+- Script de instalación automatizado
+- Estructura de proyecto completa
+
+Este commit implementa el Capítulo 1 del libro
+'NÉMESIS IA: El Manual del Hacker Justiciero'"
+
+# Configurar branch principal como 'main'
+git branch -M main
+```
+
+### Paso 3: Conectar con GitHub
+
+```bash
+# Añadir remote (reemplaza TU_USUARIO con tu username de GitHub)
+git remote add origin git@github.com:TU_USUARIO/nemesis-ai.git
+
+# O si prefieres HTTPS:
+# git remote add origin https://github.com/TU_USUARIO/nemesis-ai.git
+
+# Verificar remote
+git remote -v
+
+# Push inicial
+git push -u origin main
+```
+
+### Paso 4: Verificar en GitHub
+
+Ve a `https://github.com/TU_USUARIO/nemesis-ai` y verifica que todo esté subido.
+
+---
+
+## 🎯 Opción 2: Fork del Repositorio Oficial (Cuando Exista)
+
+```bash
+# 1. Fork en GitHub UI
+# Ve a https://github.com/nemesis-ai/nemesis
+# Click "Fork"
+
+# 2. Clonar tu fork
+git clone git@github.com:TU_USUARIO/nemesis.git
+cd nemesis
+
+# 3. Añadir upstream
+git remote add upstream git@github.com:nemesis-ai/nemesis.git
+
+# 4. Verificar remotes
+git remote -v
+# origin    git@github.com:TU_USUARIO/nemesis.git (fetch)
+# origin    git@github.com:TU_USUARIO/nemesis.git (push)
+# upstream  git@github.com:nemesis-ai/nemesis.git (fetch)
+# upstream  git@github.com:nemesis-ai/nemesis.git (push)
+```
+
+---
+
+## 🔧 Configuración de Git
+
+### Configurar Identidad
+
+```bash
+# Global (para todos los repos)
+git config --global user.name "Tu Nombre"
+git config --global user.email "tu-email@example.com"
+
+# Solo para este repo
+git config user.name "Tu Nombre"
+git config user.email "tu-email@example.com"
+```
+
+### Configurar Editor
+
+```bash
+# Usar nano como editor
+git config --global core.editor nano
+
+# O vim
+git config --global core.editor vim
+```
+
+### Configurar Aliases Útiles
+
+```bash
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.last 'log -1 HEAD'
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+```
+
+---
+
+## 📝 Workflow de Desarrollo
+
+### Crear Feature Branch
+
+```bash
+# Sincronizar con main
+git checkout main
+git pull origin main
+
+# Crear branch para nuevo feature
+git checkout -b feature/capitulo-2-ml-training
+
+# Hacer cambios...
+# Editar archivos
+
+# Ver cambios
+git status
+git diff
+
+# Añadir cambios
+git add src/ml/train_brain.py
+# O todos los cambios:
+git add .
+
+# Commit
+git commit -m "feat: Implement ML training (Capítulo 2)
+
+- Add train_brain.py with Random Forest training
+- Generate synthetic dataset
+- Feature engineering implementation
+- Model evaluation metrics
+- Joblib serialization
+
+Implements Chapter 2 of the book"
+
+# Push
+git push origin feature/capitulo-2-ml-training
+```
+
+### Crear Pull Request
+
+1. Ve a tu repo en GitHub
+2. Verás banner: "Compare & pull request"
+3. Click el botón
+4. Completa descripción del PR
+5. Submit
+
+### Merge PR
+
+Después de code review y approval:
+```bash
+# Merge en GitHub UI, luego localmente:
+git checkout main
+git pull origin main
+git branch -d feature/capitulo-2-ml-training
+```
+
+---
+
+## 🏷️ Tags y Releases
+
+### Crear Tag de Versión
+
+```bash
+# Tag simple
+git tag v1.0.0
+
+# Tag anotado (recomendado)
+git tag -a v1.0.0 -m "Release v1.0.0 - Capítulo 1 completo
+
+Primer release de Némesis IA con:
+- Agente autónomo
+- Detección de amenazas
+- Documentación completa"
+
+# Push tags
+git push origin v1.0.0
+# O todos los tags:
+git push origin --tags
+```
+
+### Crear Release en GitHub
+
+1. Ve a tu repo: `https://github.com/TU_USUARIO/nemesis-ai`
+2. Click "Releases" > "Create a new release"
+3. Selecciona tag: `v1.0.0`
+4. Release title: `v1.0.0 - Capítulo 1: El Agente Némesis`
+5. Descripción: Copia de CHANGELOG.md
+6. Opcionalmente adjunta binarios
+7. Click "Publish release"
+
+---
+
+## 🔄 Mantener Fork Actualizado
+
+```bash
+# Sincronizar con upstream
+git checkout main
+git fetch upstream
+git merge upstream/main
+git push origin main
+```
+
+---
+
+## 🛠️ Comandos Git Útiles
+
+### Ver Historia
+
+```bash
+# Log bonito
+git log --oneline --graph --all
+
+# Con alias (si configuraste):
+git lg
+
+# Últimos 5 commits
+git log -5
+
+# Cambios en archivo específico
+git log -p src/core/nemesis_agent.py
+```
+
+### Deshacer Cambios
+
+```bash
+# Descartar cambios en archivo
+git checkout -- archivo.py
+
+# Descartar todos los cambios
+git reset --hard
+
+# Revertir último commit (crea nuevo commit)
+git revert HEAD
+
+# Deshacer último commit (PELIGROSO - borra commit)
+git reset --hard HEAD~1
+```
+
+### Stash (Guardar Cambios Temporalmente)
+
+```bash
+# Guardar cambios
+git stash
+
+# Ver stashes
+git stash list
+
+# Aplicar último stash
+git stash pop
+
+# Aplicar stash específico
+git stash apply stash@{0}
+```
+
+---
+
+## 📚 Recursos
+
+- **Git Book:** https://git-scm.com/book/en/v2
+- **GitHub Docs:** https://docs.github.com/
+- **Git Cheat Sheet:** https://education.github.com/git-cheat-sheet-education.pdf
+
+---
+
+## 🆘 Problemas Comunes
+
+### "Permission denied (publickey)"
+
+```bash
+# Verificar SSH key
+ssh -T git@github.com
+
+# Si falla, genera nueva SSH key (ver arriba)
+```
+
+### "Repository not found"
+
+```bash
+# Verificar URL del remote
+git remote -v
+
+# Corregir si es necesario
+git remote set-url origin git@github.com:TU_USUARIO/nemesis-ai.git
+```
+
+### Conflictos de Merge
+
+```bash
+# Identificar archivos con conflictos
+git status
+
+# Editar archivos, buscar:
+# <<<<<<< HEAD
+# tu código
+# =======
+# código del otro branch
+# >>>>>>> branch-name
+
+# Resolver, luego:
+git add archivo-resuelto.py
+git commit -m "fix: Resolve merge conflict in archivo-resuelto.py"
+```
+
+---
+
+**¡Listo!** Ya tienes tu repositorio configurado y subido a GitHub. 🎉
+
+**Siguiente paso:** Implementar Capítulo 2 y hacer tu segundo commit.

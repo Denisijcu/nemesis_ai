@@ -1,0 +1,69 @@
+# Némesis IA - Core Dependencies
+# Python 3.10+
+
+# Machine Learning
+numpy>=1.24.0
+scikit-learn>=1.3.0
+joblib>=1.3.0
+pandas>=2.0.0
+
+# Async & Networking
+asyncio-mqtt>=0.16.0
+aiohttp>=3.9.0
+websockets>=12.0
+
+# P2P Network
+kademlia>=2.2.2
+
+# Cryptography
+cryptography>=41.0.0
+pycryptodome>=3.19.0
+
+# Post-Quantum Crypto (requires liboqs)
+# Install liboqs first: https://github.com/open-quantum-safe/liboqs-python
+# pip install liboqs-python --break-system-packages
+
+# Blockchain
+hashlib  # Built-in
+
+# Database
+sqlalchemy>=2.0.0
+alembic>=1.12.0
+
+# Configuration
+pyyaml>=6.0
+python-dotenv>=1.0.0
+
+# Logging & Monitoring
+colorlog>=6.7.0
+python-json-logger>=2.0.0
+
+# GeoIP
+geoip2>=4.7.0
+maxminddb>=2.5.0
+
+# Reporting
+reportlab>=4.0.0
+pypdf>=3.17.0
+python-docx>=1.1.0
+openpyxl>=3.1.0
+
+# Email
+aiosmtplib>=3.0.0
+
+# HTTP Server / API
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+
+# Utilities
+python-dateutil>=2.8.2
+pytz>=2023.3
+click>=8.1.0  # CLI
+rich>=13.7.0  # Pretty terminal output
+
+# Rate Limiting
+slowapi>=0.1.9
+
+# Validation
+validators>=0.22.0
