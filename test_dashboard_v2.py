@@ -18,7 +18,7 @@ async def main():
     print()
     
     # Usar la BD con datos existentes
-    db = ThreatDatabase("data/nemesis_complete_test.db")
+    db = ThreatDatabase("data/nemesis_honeypot.db")
     
     print("✅ Base de datos cargada")
     print()
