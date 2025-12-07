@@ -157,6 +157,12 @@ Detección híbrida con:
 - DDoS patterns
 - Y más...
 
+## 📺 Demo en Acción
+
+![Nemesis AI Demo](Animation.gif)
+*(Detección y respuesta autónoma en tiempo real)*
+
+
 ### 2. 🍯 Honeypot Traps
 
 Sistema de trampas activas:
