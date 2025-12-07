@@ -7,7 +7,7 @@
 
 ## 🎥 Video Demo
 
-[![NÉMESIS IA - Demo Completa](https://img.shields.io/badge/▶️_Watch_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtube.com/watch?v=elvhQrUTkKQ)
+[![NÉMESIS IA - Demo Completa](https://img.shields.io/badge/▶️_Watch_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtube.com/watch?v=DSkNZ8yKpwQ)
 
 **🚀 Ver sistema en acción:** Detección ML + Honeypots + Blockchain + Quantum Defense + RED BUTTON
 
