@@ -92,17 +92,25 @@ class DashboardUnified:
                 }
                 for t in threats
             ]
-        
+         
         @self.app.get("/api/blocked_ips")
         async def get_blocked_ips():
             return self.database.get_blocked_ips()
         
         @self.app.get("/api/honeypot_stats")
         async def get_honeypot_stats():
-            threats = self.database.get_threats(limit=100)
-            honeypot_threats = [t for t in threats if "HONEYPOT" in t.attack_type]
+            import sqlite3
             
-            if not honeypot_threats:
+            # Consultar tabla honeypot_captures directamente
+            conn = sqlite3.connect('data/nemesis_honeypot.db')
+            cursor = conn.cursor()
+            
+            # Total de capturas
+            cursor.execute('SELECT COUNT(*) FROM honeypot_captures')
+            total = cursor.fetchone()[0]
+            
+            if total == 0:
+                conn.close()
                 return {
                     "total_captures": 0,
                     "active_traps": 0,
@@ -110,25 +118,79 @@ class DashboardUnified:
                     "recent_captures": []
                 }
             
-            from collections import Counter
-            ip_counts = Counter(t.source_ip for t in honeypot_threats)
-            top_attacker = ip_counts.most_common(1)[0] if ip_counts else None
+            # Top atacante
+            cursor.execute('''
+                SELECT ip, COUNT(*) as attempts 
+                FROM honeypot_captures 
+                GROUP BY ip 
+                ORDER BY attempts DESC 
+                LIMIT 1
+            ''')
+            top = cursor.fetchone()
+            
+            # Capturas recientes
+            cursor.execute('''
+                SELECT ip, payload, timestamp 
+                FROM honeypot_captures 
+                ORDER BY timestamp DESC 
+                LIMIT 10
+            ''')
+            recent = cursor.fetchall()
+            
+            conn.close()
             
             return {
-                "total_captures": len(honeypot_threats),
+                "total_captures": total,
                 "active_traps": 1,
                 "top_attacker": {
-                    "ip": top_attacker[0],
-                    "attempts": top_attacker[1]
-                } if top_attacker else None,
+                    "ip": top[0],
+                    "attempts": top[1]
+                } if top else None,
                 "recent_captures": [
                     {
-                        "ip": t.source_ip,
-                        "payload": t.payload,
-                        "timestamp": t.timestamp.isoformat()
+                        "ip": r[0],
+                        "payload": r[1],
+                        "timestamp": r[2]
                     }
-                    for t in honeypot_threats[:5]
+                    for r in recent
                 ]
+            }
+        
+        @self.app.get("/api/threat_timeline")
+        async def get_threat_timeline():
+            import sqlite3
+            from datetime import datetime, timedelta
+            
+            conn = sqlite3.connect('data/nemesis_honeypot.db')
+            cursor = conn.cursor()
+            
+            # Obtener amenazas de las últimas 24 horas
+            cursor.execute('''
+                SELECT timestamp 
+                FROM threats 
+                WHERE timestamp >= datetime('now', '-24 hours')
+                ORDER BY timestamp
+            ''')
+            
+            threats = cursor.fetchall()
+            conn.close()
+            
+            # Inicializar contadores por hora (0-23)
+            hourly_counts = [0] * 24
+            
+            # Contar amenazas por hora
+            for threat in threats:
+                try:
+                    dt = datetime.fromisoformat(threat[0])
+                    hour = dt.hour
+                    hourly_counts[hour] += 1
+                except:
+                    pass
+            
+            return {
+                "hours": [f"{i}:00" for i in range(24)],
+                "counts": hourly_counts,
+                "total": sum(hourly_counts)
             }
         
         @self.app.get("/api/blockchain_stats")
@@ -1485,24 +1547,29 @@ class DashboardUnified:
         let attackTypesChart = null;
         
         async function loadCharts() {
-            const response = await fetch('/api/stats');
-            const stats = await response.json();
+            // Timeline Chart con datos reales
+            const timelineResponse = await fetch('/api/threat_timeline');
+            const timelineData = await timelineResponse.json();
+            
             const ctx1 = document.getElementById('timelineChart');
             if (timelineChart) timelineChart.destroy();
-            const hours = Array.from({length: 24}, (_, i) => `${i}:00`);
-            const data = new Array(24).fill(0);
+            
             timelineChart = new Chart(ctx1, {
                 type: 'line',
                 data: {
-                    labels: hours,
+                    labels: timelineData.hours,
                     datasets: [{
-                        label: 'Threats',
-                        data: data,
+                        label: 'Threats Detected',
+                        data: timelineData.counts,
                         borderColor: '#00ff41',
-                        backgroundColor: 'rgba(0, 255, 65, 0.1)',
+                        backgroundColor: 'rgba(0, 255, 65, 0.2)',
                         tension: 0.4,
                         fill: true,
-                        borderWidth: 2
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#00ff41',
+                        pointBorderColor: '#0a0e14',
+                        pointBorderWidth: 2
                     }]
                 },
                 options: {
@@ -1510,26 +1577,43 @@ class DashboardUnified:
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            labels: { color: '#00ff41', font: { family: 'Courier New' } }
+                            labels: { 
+                                color: '#00ff41', 
+                                font: { family: 'Courier New', size: 12 } 
+                            }
                         }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            ticks: { color: '#00ff41', font: { family: 'Courier New' } },
+                            ticks: { 
+                                color: '#00ff41', 
+                                font: { family: 'Courier New' },
+                                stepSize: 1
+                            },
                             grid: { color: 'rgba(0, 255, 65, 0.1)' }
                         },
                         x: {
-                            ticks: { color: '#00ff41', font: { family: 'Courier New' } },
+                            ticks: { 
+                                color: '#00ff41', 
+                                font: { family: 'Courier New', size: 10 } 
+                            },
                             grid: { color: 'rgba(0, 255, 65, 0.1)' }
                         }
                     }
                 }
             });
+            
+            // Attack Types Chart
+            const statsResponse = await fetch('/api/stats');
+            const stats = await statsResponse.json();
+            
             const ctx2 = document.getElementById('attackTypesChart');
             if (attackTypesChart) attackTypesChart.destroy();
+            
             const types = Object.keys(stats.threats_by_type || {});
             const counts = Object.values(stats.threats_by_type || {});
+            
             attackTypesChart = new Chart(ctx2, {
                 type: 'doughnut',
                 data: {
@@ -1547,7 +1631,10 @@ class DashboardUnified:
                     plugins: {
                         legend: {
                             position: 'bottom',
-                            labels: { color: '#00ff41', font: { family: 'Courier New' } }
+                            labels: { 
+                                color: '#00ff41', 
+                                font: { family: 'Courier New' } 
+                            }
                         }
                     }
                 }
