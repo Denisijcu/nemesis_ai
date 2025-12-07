@@ -70,6 +70,8 @@ async def test_detection():
         print(f"Esperado: {test['expected']}")
         
         try:
+            # Parsear el log primero para obtener source_ip
+            event = agent._parse_log(test['log'])
             verdict = await agent.process_log_line(test['log'])
             
             if verdict:
@@ -87,14 +89,17 @@ async def test_detection():
                 print(f"   Tipo: {verdict.attack_type}")
                 print(f"   Acción: {verdict.recommended_action}")
                 
-                if verdict.is_malicious:
-                    print(f"   🎯 Source IP: {verdict.threat_event.source_ip}")
-                    print(f"   📦 Payload: {verdict.threat_event.payload[:50]}...")
+                # ✅ ARREGLADO: Usar event en lugar de verdict.threat_event
+                if verdict.is_malicious and event:
+                    print(f"   🎯 Source IP: {event.source_ip}")
+                    print(f"   📦 Payload: {event.payload[:50]}...")
             else:
                 print("⚠️  Sin veredicto")
         
         except Exception as e:
             print(f"❌ Error: {e}")
+            import traceback
+            traceback.print_exc()
         
         print()
     
