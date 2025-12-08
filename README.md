@@ -549,8 +549,21 @@ await alert_mgr.send_critical_alert(
     confidence=0.95
 )
 ```
+### 🐳 Ejecución Rápida con Docker
 
+Despliega el sistema completo (Dashboard + Módulos) en un contenedor aislado.
+
+1. **Construir la imagen:**
+   ```bash
+   docker build --network=host -t nemesis_ai .
 ---
+Iniciar Némesis:
+
+Bash
+
+docker run -d -p 8080:8080 --name nemesis_ai nemesis_ai
+Acceder: Ve a http://localhost:8080 en tu navegador.
+
 
 ## 📊 Comparativa
 
