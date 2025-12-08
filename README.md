@@ -217,6 +217,8 @@ Sistema de emergencia que:
 2. Registra evidencia en blockchain
 3. Analiza threat intelligence
 4. Notifica a CERTs (US-CERT, CERT-EU, FIRST)
+![NDemo](docs/Push_red_button.gif)
+*(Push Red Button Demo)*
 
 **Todo en ~5 segundos**
 
