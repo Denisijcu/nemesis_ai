@@ -5,7 +5,7 @@ telegram:
   # 1. Hablar con @BotFather en Telegram
   # 2. Crear nuevo bot con /newbot
   # 3. Copiar el token
-  bot_token: "8371274840:AAFMYogDhjaUFCq89yFFIDCtm8H9xhuEujc"
+  bot_token: "8371274840:AA"
   
   # Para obtener chat_id:
   # 1. Enviar mensaje a tu bot
@@ -17,7 +17,7 @@ email:
   # Configuración SMTP (ejemplo con Gmail)
   smtp_server: "smtp.gmail.com"
   smtp_port: 587
-  username: "denisijcu266@gmail.com"
+  username: "johndoe@gmail.com"
   password: "crtu mpkx hqsx faiy"  # Usar App Password, no password normal
-  from_email: "denisijcu266@gmail.com"
-  to_email: "denisijcu266@gmail.com"
+  from_email: "johndoe6@gmail.com"
+  to_email: "johondoe@gmail.com"
