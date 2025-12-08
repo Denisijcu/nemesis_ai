@@ -163,6 +163,10 @@ Detección híbrida con:
 *(Detección y respuesta autónoma en tiempo real)*
 
 
+![Nemesis AI Demo](fake_threats.gif)
+*(Detección y respuesta autónoma en tiempo real)*
+
+
 ### 2. 🍯 Honeypot Traps
 
 Sistema de trampas activas:
