@@ -159,11 +159,11 @@ Detección híbrida con:
 
 ## 📺 Demo en Acción
 
-![Nemesis AI Demo](Animation.gif)
+![Nemesis AI Demo](fake_threats.gif)
 *(Detección y respuesta autónoma en tiempo real)*
 
 
-![Nemesis AI Demo2](fake_threats.gif)
+
 
 
 
