@@ -24,6 +24,8 @@
 
 ---
 
+![Nemesis AI Dashboard](docs/Screenshot_2025-08_08-11-56.png)
+
 ## 📋 Tabla de Contenidos
 
 - [Descripción](#descripción)
@@ -157,10 +159,6 @@ Detección híbrida con:
 - DDoS patterns
 - Y más...
 
-## 📺 Demo en Acción
-
-![Nemesis AI Demo](docs/fake_threats.gif)
-*(Detección y respuesta autónoma en tiempo real)*
 
 
 
@@ -217,8 +215,6 @@ Sistema de emergencia que:
 2. Registra evidencia en blockchain
 3. Analiza threat intelligence
 4. Notifica a CERTs (US-CERT, CERT-EU, FIRST)
-![NDemo](docs/Push_red_button.gif)
-*(Push Red Button Demo)*
 
 **Todo en ~5 segundos**
 
@@ -289,6 +285,9 @@ python src/database/threat_database.py
 # Genera 90 amenazas con patrones realistas
 python generate_demo_threats_advanced.py
 ```
+![Nemesis AI Demo](docs/fake_threats.gif)
+*(Detección y respuesta autónoma en tiempo real)*
+
 
 **Output esperado:**
 - 90 amenazas distribuidas en 24 horas
@@ -327,6 +326,9 @@ Verificarás:
 ```bash
 python test_red_button.py
 ```
+![NDemo](docs/Push_red_button.gif)
+*(Push Red Button Demo)*
+
 
 **El sistema:**
 1. Analiza threat intelligence (Spamhaus, WHOIS)
