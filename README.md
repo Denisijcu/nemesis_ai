@@ -24,9 +24,9 @@
 
 ---
 
-![Nemesis AI Dashboard](docs/Screenshot_2025-12-08_08-11-56.png)
-![Nemesis AI Dashboard](docs/Screenshot_2025-12-08_08-12-12.png)
-![Nemesis AI Dashboard](docs/Screenshot_2025-12-08_08-12-31.png)
+![Nemesis AI Dashboard](docs/sc_1.png)
+![Nemesis AI Dashboard](docs/sc_2.png)
+![Nemesis AI Dashboard](docs/sc_3.png)
 
 
 ## 📋 Tabla de Contenidos
