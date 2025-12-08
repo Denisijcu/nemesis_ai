@@ -364,6 +364,8 @@ python test_red_button.py
 ```bash
 python test_quantum_complete.py
 ```
+![NDemo](docs/test_quantum_complete.gif)
+*(test_quantum_complete Demo)*
 
 **Highlights:**
 ```
