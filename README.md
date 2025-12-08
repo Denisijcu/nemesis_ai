@@ -7,7 +7,7 @@
 
 ## 🎥 Video Demo
 
-[![NÉMESIS IA - Demo Completa](https://img.shields.io/badge/▶️_Watch_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtube.com/watch?v=elvhQrUTkKQ)
+[![NÉMESIS IA - Demo Completa](https://img.shields.io/badge/▶️_Watch_Demo-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtube.com/watch?v=DSkNZ8yKpwQ)
 
 **🚀 Ver sistema en acción:** Detección ML + Honeypots + Blockchain + Quantum Defense + RED BUTTON
 
@@ -156,6 +156,12 @@ Detección híbrida con:
 - Port Scanning
 - DDoS patterns
 - Y más...
+
+## 📺 Demo en Acción
+
+![Nemesis AI Demo](Animation.gif)
+*(Detección y respuesta autónoma en tiempo real)*
+
 
 ### 2. 🍯 Honeypot Traps
 
@@ -719,3 +725,14 @@ Responderemos en 48 horas.
 [Documentación](docs/) • [Demos](demos/) • [Contribuir](#contribuir) • [Licencia](#licencia)
 
 </div>
+
+## ⚠️ Disclaimer / Exención de Responsabilidad
+
+Este proyecto, **Nemesis AI**, ha sido desarrollado con fines estrictamente educativos y de investigación. 
+
+El autor (Denisijcu) no se hace responsable del mal uso que terceros puedan darle a este software, ni de los daños que pueda causar si se utiliza en entornos de producción sin la debida supervisión o autorización. El usuario final asume toda la responsabilidad por el cumplimiento de las leyes y regulaciones locales aplicables al uso de esta tecnología.
+
+---
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
