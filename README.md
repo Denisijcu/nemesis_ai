@@ -24,6 +24,11 @@
 
 ---
 
+![Nemesis AI Dashboard](docs/Screenshot_2025-12-08_08-11-56.png)
+![Nemesis AI Dashboard](docs/Screenshot_2025-12-08_08-12-12.png)
+![Nemesis AI Dashboard](docs/Screenshot_2025-12-08_08-12-31.png)
+
+
 ## 📋 Tabla de Contenidos
 
 - [Descripción](#descripción)
@@ -157,10 +162,6 @@ Detección híbrida con:
 - DDoS patterns
 - Y más...
 
-## 📺 Demo en Acción
-
-![Nemesis AI Demo](docs/fake_threats.gif)
-*(Detección y respuesta autónoma en tiempo real)*
 
 
 
@@ -287,6 +288,9 @@ python src/database/threat_database.py
 # Genera 90 amenazas con patrones realistas
 python generate_demo_threats_advanced.py
 ```
+![Nemesis AI Demo](docs/fake_threats.gif)
+*(Detección y respuesta autónoma en tiempo real)*
+
 
 **Output esperado:**
 - 90 amenazas distribuidas en 24 horas
@@ -325,6 +329,9 @@ Verificarás:
 ```bash
 python test_red_button.py
 ```
+![NDemo](docs/Push_red_button.gif)
+*(Push Red Button Demo)*
+
 
 **El sistema:**
 1. Analiza threat intelligence (Spamhaus, WHOIS)
