@@ -71,7 +71,7 @@ class DashboardUnified:
     def _setup_routes(self):
         @self.app.get("/", response_class=HTMLResponse)
         async def dashboard():
-            return self._get_dashboard_html()
+            return HTMLResponse(content=self._get_dashboard_html())
         
         @self.app.get("/api/stats")
         async def get_stats():
